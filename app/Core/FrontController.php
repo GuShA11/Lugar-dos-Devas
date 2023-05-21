@@ -38,6 +38,34 @@ class FrontController
                 $controller->error404();
             }
         );
+
+        //reservas
+        Route::add(
+            '/reservas',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\ReservasController();
+                $controlador->showForm();
+            },
+            'get'
+        );
+          //reservas
+          Route::add(
+            '/reservas/add',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\ReservasController();
+                $controlador->add();
+            },
+            'post'
+        );
+          //reservas
+          Route::add(
+            '/reservas/admin',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\ReservasController();
+                $controlador->checkAvailability();
+            },
+            'get'
+        );
         
 
         //si no hay session se ve el index y las de fuera, /login y pathnotFOund

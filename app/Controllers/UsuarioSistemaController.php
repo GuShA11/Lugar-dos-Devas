@@ -10,6 +10,9 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
     const AUDITOR = 2;
     
     public function login() {
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $data['productos'] = $modelo->getHabitaciones();
+        var_dump($data);
         $this->view->show('login.view.php');
     }
 

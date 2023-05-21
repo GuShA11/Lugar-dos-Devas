@@ -14,8 +14,8 @@
         <img src="/assets/img/LOGO2.svg" alt="Logo">
         <nav>
         <ul class="menu">
-      <li class="active"><a class="active" href="#">Inicio</a></li>
-      <li><a href="#">Reservas</a></li>
+      <li class="nav-link <?php echo isset($seccion) && $seccion === '/index' ? 'active' : ''; ?>"><a href="/">Inicio</a></li>
+      <li class="nav-link <?php echo isset($seccion) && $seccion === '/reservas' ? 'active' : ''; ?>"><a href="/reservas">Reservas</a></li>
       <li><a href="#">Restaurante</a></li>
       <li><a href="#">Contacto</a></li>
       <li><a class="nav-link" href="<?php echo isset($_SESSION['usuario']['id_usuario']) ? '/session/borrar' : '/login';?>" role="button">

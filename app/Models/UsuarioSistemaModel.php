@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Com\Daw2\Models;
 
-use \PDOException;
-
 class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {       
     
     public function login(string $email, string $password): ?array {
@@ -20,5 +18,15 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
             }
         } 
         return NULL;
+    }
+    
+    public function updateLoginData(int $id_usuario) : bool {
+        $stmt = $this->pdo->prepare('UPDATE usuario_sistema SET last_date=SYSDATE() WHERE id_usuario=?');
+        return $stmt->execute([$id_usuario]);
+    }
+
+    function getHabitaciones(){
+        $stmt = $this->pdo->query('SELECT id_habitacion,nombre_habitacion FROM habitaciones');
+        return $stmt->fetchAll();
     }
 }
