@@ -38,6 +38,15 @@ class FrontController
                 $controller->error404();
             }
         );
+        
+        Route::add(
+                '/',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\IndexController();
+                    $controlador->index();
+                },
+                'get'
+            );
 
         //reservas
         Route::add(

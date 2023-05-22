@@ -8,25 +8,27 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
     public function showForm() {
         $data = [];
         $data['seccion'] = '/reservas';
-        $usuarioSistemaModel = new \Com\Daw2\Models\ReservasModel();
-        $data['productos'] = $usuarioSistemaModel->getHabitaciones();
-        var_dump($data);
-        
+        $reservasModel = new \Com\Daw2\Models\ReservasModel();
+        $data['habitaciones'] = $reservasModel->getHabitaciones();
         $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'),$data);
     }
 
     function add(): void {
         $data = [];
         $data['seccion'] = '/reservas/add';
-        $data['errores'] = $this->checkFormAdd($_POST);
+        $reservasModel = new \Com\Daw2\Models\ReservasModel();
+        $habitaciones = $reservasModel->getHabitaciones();
+         foreach ($habitaciones as $habitacion ) {
+                $arrHabitaciones[]=$habitacion['id_habitacion'];
+            }
+        $data['habitaciones']=$habitaciones;
+        $data['errores'] = $this->checkFormAdd($_POST,$arrHabitaciones);
         if (count($data['errores']) === 0) {
-        $modelo = new \Com\Daw2\Models\ReservasModel();
-           $result = $modelo->add($_POST['nombre'], $_POST['email'], $_POST['fecha-llegada'], $_POST['fecha-salida'], $_POST['habitacion']);
-
-            if ($result == 1) {
-                header('Location: /reservas');
+        $result = $reservasModel->add( $_POST['email'],$_POST['nombre'], $_POST['fecha-llegada'], $_POST['fecha-salida'], $_POST['habitacion']);
+           if ($result == 1) {
+                header('Location: /');
             } else if ($result == 0) {
-                header('Location: /reservas/cant_add');
+                header('Location: /reservas');
             } else {
                 header('location: methodNotAllowed');
             }
@@ -35,23 +37,16 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
             $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'),$data);
         }
     }
-
-    function cant_add() {
-        $data = [];
-        $data['seccion'] = '/reservas/cant_add';
-        $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'),$data);
-    }
-    function checkFormAdd(array $post): array {
-        var_dump($post);
+    function checkFormAdd(array $post,array $rooms): array {
         $errores = [];
         if (empty($post['nombre'])) {
             $errores['nombre'] = "Campo obligatorio";
-        } else if (!preg_match("/^[a-zA-Z]+$/", $post['nombre'])) {
+        } else if (!preg_match("/^[a-zA-Z\s]+$/", $post['nombre'])) {
             $errores['nombre'] = "El nombre debe estar compuesto solo de letras sin espacios o caracteres especiales.";
         }
         if (empty($post['email'])) {
             $errores['email'] = "Campo obligatorio";
-        } else if (filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+        } else if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = "El email debe cumplir el formato de un email normal \"ejemplo@gmail.com\"";
         }
         $arrivalDate = $post['fecha-llegada'];
@@ -61,11 +56,18 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
         }else{
             $arrivalTimestamp = strtotime($arrivalDate);
             $departureTimestamp = strtotime($departureDate);
-        
-        if ($arrivalTimestamp >= $departureTimestamp) {
-            $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida";
-        }
-
+            $currentTimestamp = time();
+            if ($arrivalTimestamp >= $departureTimestamp) {
+                $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida";
+            }
+            if($arrivalTimestamp < $currentTimestamp || $departureTimestamp < $currentTimestamp){
+                $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida";
+            }
+            if(is_int($post['habitacion'])){
+                if(!(in_array($post['habitacion'],$rooms))){
+                    $errores['habitacion']="Por favor seleccione una habitacion";
+                }
+            }
         } 
 
         return $errores;
