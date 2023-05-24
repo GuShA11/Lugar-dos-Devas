@@ -4,107 +4,136 @@ namespace Com\Daw2\Core;
 
 use Steampixel\Route;
 
-class FrontController
-{
+class FrontController {
 
-    static function main()
-    {
+    static function main() {
         session_start();
-
-        //login
-        Route::add(
-            '/login',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
-                $controlador->login();
-            },
-            'get'
-        );
-                    
-        //login
-        Route::add(
-            '/login',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
-                $controlador->loginProcess();
-            },
-            'post'
-        );
-
-        //path not found
-        Route::pathNotFound(
-            function () {
-                $controller = new \Com\Daw2\Controllers\ErroresController();
-                $controller->error404();
-            }
-        );
-        
-        Route::add(
-                '/',
-                function () {
-                    $controlador = new \Com\Daw2\Controllers\IndexController();
-                    $controlador->index();
-                },
-                'get'
-            );
-
-        //reservas
-        Route::add(
-            '/reservas',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\ReservasController();
-                $controlador->showForm();
-            },
-            'get'
-        );
-          //reservas
-          Route::add(
-            '/reservas/add',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\ReservasController();
-                $controlador->add();
-            },
-            'post'
-        );
-          //reservas
-          Route::add(
-            '/reservas/admin',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\ReservasController();
-                $controlador->checkAvailability();
-            },
-            'get'
-        );
-        
-
-        //si no hay session se ve el index y las de fuera, /login y pathnotFOund
+        //si no hay session es porque eres un usario default y ves index reservas restaurantes contacto login
         if (!isset($_SESSION['usuario'])) {
+
+            //login GET
             Route::add(
-                '/',
-                function () {
-                    $controlador = new \Com\Daw2\Controllers\IndexController();
-                    $controlador->index();
-                },
-                'get'
+                    '/login',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->login();
+                    },
+                    'get'
             );
 
-            //si hay session es que eres admin y ves cosas de admin + borrar session
-        } else {
-            Route::add('/session/borrar',
-            function () {
-                $controlador = new \Com\Daw2\Controllers\SessionController();
-                $controlador->borrarVariableSession();
-            }
-            , 'get');
+            //login POST
             Route::add(
-                '/',
-                function () {
-                    $controlador = new \Com\Daw2\Controllers\IndexController();
-                    $controlador->index();
-                },
-                'get'
+                    '/login',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->loginProcess();
+                    },
+                    'post'
             );
+
+            //index
+            Route::add(
+                    '/',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->index();
+                    },
+                    'get'
+            );
+
+            //showReserva escoger fechas
+            Route::add(
+                    '/reservas',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->showForm();
+                    },
+                    'get'
+            );
+            //showReserva enseñar formulario para la reserva
+            Route::add(
+                    '/reservas',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->checkAvailability();
+                    },
+                    'post'
+            );
+            //reservas add cuando se pudo añadir
+            Route::add(
+                    '/reservas/add',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->add();
+                    },
+                    'post'
+            );
+            //restaurante
+            Route::add(
+                    '/',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->restaurante();
+                    },
+                    'get'
+            );
+            //contacto
+            Route::add(
+                    '/',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->contacto();
+                    },
+                    'get'
+            );
+
+            //si hay session es porque eres admin y solo vas a ver lo de admin y borrarSession
+        } else {
+
+            //usuariosAdmin
+            Route::add(
+                    '/usuarios/admin',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->usuarios();
+                    },
+                    'get'
+            );
+            //habitacionesAdmin
+            Route::add(
+                    '/habitaciones/admin',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->habitaciones();
+                    },
+                    'get'
+            );
+
+            //reservasAdmin
+            Route::add(
+                    '/reservas/admin',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\IndexController();
+                        $controlador->reservas();
+                    },
+                    'get'
+            );
+            //borrarSession
+            Route::add('/session/borrar',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\SessionController();
+                        $controlador->borrarVariableSession();
+                    }
+                    , 'get');
         }
+        //path not found error404
+        Route::pathNotFound(
+                function () {
+                    $controller = new \Com\Daw2\Controllers\ErroresController();
+                    $controller->error404();
+                }
+        );
         Route::run();
     }
+
 }

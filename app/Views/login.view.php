@@ -26,7 +26,7 @@
      <!-- <p class="login-box-msg">Datos acceso: <i>admin@test.org - test</i></p>     -->  
       <form action="/login" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
+          <input type="text" name="user" class="form-control" placeholder="User">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

@@ -6,9 +6,9 @@ namespace Com\Daw2\Models;
 
 class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {       
     
-    public function login(string $email, string $password): ?array {
-        $stmt = $this->pdo->prepare("SELECT usuario_sistema.*, aux_rol.nombre_rol FROM usuario_sistema LEFT JOIN aux_rol ON aux_rol.id_rol = usuario_sistema.id_rol WHERE email=? and baja=0");
-        $stmt->execute([$email]);
+    public function login(string $user, string $password): ?array {
+        $stmt = $this->pdo->prepare("SELECT usuario_sistema.*, aux_rol.nombre_rol FROM usuario_sistema LEFT JOIN aux_rol ON aux_rol.id_rol = usuario_sistema.id_rol WHERE user=? and baja=0");
+        $stmt->execute([$user]);
         if($stmt->rowCount() == 1) {
             $userData = $stmt->fetchAll()[0];
 
