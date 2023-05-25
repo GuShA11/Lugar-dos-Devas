@@ -23,11 +23,12 @@ class ReservasModel extends \Com\Daw2\Core\BaseModel {
     }
 
     public function getHabitaciones() {
-        $stmt = $this->pdo->query('SELECT id_habitacion,nombre_habitacion FROM habitaciones');
+        $stmt = $this->pdo->query('SELECT id_habitacion FROM habitaciones');
         return $stmt->fetchAll();
     }
 
     public function checkHabitacionesAvailable($fecha_llegada, $fecha_salida) {
+        //query que devuelve las ocupcadas
         $stmt1 = $this->pdo->prepare('
 SELECT habitacion
 FROM reservas
@@ -45,20 +46,30 @@ OR (:fecha_llegadaaa <= fecha_llegada AND fecha_salida <= :fecha_salidaaa)
             'fecha_salidaaa' => $fecha_salida,
         ]);
 
-        $ocupadas = $stmt1->fetchAll();
-        $ocupadas2 = [];
-        for ($i = 0; $i < count($ocupadas); $i++) {
-            $ocupadas2[] = $ocupadas[$i]['habitacion'];
+        $ocupadasConsulta = $stmt1->fetchAll();
+
+        //dar valor a $ocupadas
+        $ocupadas = [];
+        for ($i = 0; $i < count($ocupadasConsulta); $i++) {
+            $ocupadas[] = $ocupadasConsulta[$i]['habitacion'];
         }
 
-        $stmt2 = $this->pdo->prepare('
-SELECT * FROM habitaciones 
-WHERE NOT id_habitacion in (' . substr(str_repeat(',?', count($ocupadas2)), 1) . ');
-');
-        $stmt2->execute(
-                $ocupadas2
-        );
-        return $stmt2->fetchAll();
+        $todasHabitacionesConsulta = $this->getHabitaciones();
+        //dar valor a $todasHabitaciones
+        $todasHabitaciones = [];
+        if (count($todasHabitacionesConsulta) > 0) {
+            for ($i = 0; $i < count($todasHabitacionesConsulta); $i++) {
+                $todasHabitaciones[] = $todasHabitacionesConsulta[$i]['id_habitacion'];
+            }
+        }
+
+        $libres = array_values((array_diff($todasHabitaciones, $ocupadas))); // Ensure the array keys are consecutive
+
+        $placeholders = implode(',', array_fill(0, count($libres), '?'));
+
+        $stmt = $this->pdo->prepare("SELECT id_habitacion, nombre_habitacion FROM habitaciones WHERE id_habitacion IN ($placeholders)");
+        $stmt->execute($libres);
+        return $stmt->fetchAll();
     }
 
 }

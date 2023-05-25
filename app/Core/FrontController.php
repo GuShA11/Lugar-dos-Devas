@@ -70,7 +70,7 @@ class FrontController {
             );
             //restaurante
             Route::add(
-                    '/',
+                    '/restaurante',
                     function () {
                         $controlador = new \Com\Daw2\Controllers\IndexController();
                         $controlador->restaurante();
@@ -79,7 +79,7 @@ class FrontController {
             );
             //contacto
             Route::add(
-                    '/',
+                    '/contacto',
                     function () {
                         $controlador = new \Com\Daw2\Controllers\IndexController();
                         $controlador->contacto();

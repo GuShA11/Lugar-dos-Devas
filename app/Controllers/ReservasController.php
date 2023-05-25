@@ -7,11 +7,9 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
     public function showForm() {
         $data = [];
         $data['seccion'] = '/reservas';
-        $reservasModel = new \Com\Daw2\Models\ReservasModel();
-        $data['habitaciones'] = $reservasModel->getHabitaciones();
         $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
     }
-    
+
     function add(): void {
         $data = [];
         $data['seccion'] = '/reservas';
@@ -25,7 +23,7 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
         if (count($errores) === 0) {
             $result = $reservasModel->add($_POST['email'], $_POST['nombre'], $_POST['fecha-llegada'], $_POST['fecha-salida'], $_POST['habitacion']);
             if ($result == 1) {
-                header('Location: /');
+                header('Location: /index');
                 exit;
             } else if ($result == 0) {
                 header('Location: /reservas');
@@ -63,29 +61,27 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
     }
 
     public function checkAvailability() {
+        $data = [];
+        $data['seccion'] = '/reservas';
         $errores = [];
         $arrivalDate = $_POST['fecha-llegada'];
         $departureDate = $_POST['fecha-salida'];
         $arrivalTimestamp = strtotime($arrivalDate);
         $departureTimestamp = strtotime($departureDate);
-        $currentTimestamp = time();
-        if (empty($arrivalDate) || empty($departureDate)) {
+        $currentDate = strtotime('today');
+
+        if (empty($arrivalDate) || empty($departureDate) || $arrivalDate == '' || $departureDate == '') {
             $errores['fecha'] = "Campo obligatorio";
-        } else if (($arrivalDate == '') || ($departureDate == '')) {
-            $errores['fecha'] = "Campo obligatorio";
-        } else if ($arrivalTimestamp >= $departureTimestamp) {
-            $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida1";
-        } else if ($arrivalTimestamp < $currentTimestamp || $departureTimestamp < $currentTimestamp) {
-            $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida2";
-        } else if ($arrivalTimestamp > $departureTimestamp) {
-            $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida3";
-        } else if ($arrivalTimestamp == $departureTimestamp && $departureTimestamp <= strtotime('tomorrow')) {
-            $errores['fecha'] = "La fecha de la estadia es invalida, por favor elija una estadia válida4";
-        } else if ($arrivalDate === $departureDate) {
-            $errores['fecha'] = "La fecha de llegada no puede ser la misma que la de salida";
+        } elseif ($arrivalTimestamp >= $departureTimestamp) {
+            $errores['fecha'] = "La fecha de la estadia es inválida, por favor elija una estadía válida.";
+        } elseif ($arrivalTimestamp < $currentDate || $departureTimestamp < $currentDate) {
+            $errores['fecha'] = "La fecha de la estadia es inválida, por favor elija una estadía válida.";
+        } elseif ($arrivalTimestamp == $departureTimestamp && $departureTimestamp <= strtotime('tomorrow')) {
+            $errores['fecha'] = "La fecha de la estadia es inválida, por favor elija una estadía válida.";
+        } elseif ($arrivalDate === $departureDate) {
+            $errores['fecha'] = "La fecha de llegada no puede ser la misma que la de salida.";
         }
 
-        $data = [];
         $reservasModel = new \Com\Daw2\Models\ReservasModel();
         if (count($errores) === 0) {
             $data['habitacionesAvailable'] = $reservasModel->checkHabitacionesAvailable($_POST['fecha-llegada'], $_POST['fecha-salida']);

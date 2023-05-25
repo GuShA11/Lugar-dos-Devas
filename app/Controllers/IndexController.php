@@ -36,7 +36,7 @@ class IndexController extends \Com\Daw2\Core\BaseController {
 
     public function contacto() {
         $data = [];
-        $data['seccion'] = '/usuarios/admin';
+        $data['seccion'] = '/contacto';
         $this->view->showViews(array('templates/header.view.php', 'contacto.view.php', 'templates/footer.view.php'), $data);
     }
 

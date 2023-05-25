@@ -1,250 +1,255 @@
 /* General Styles */
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3 {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 header {
-    background-color: rgba(65,88,75,1);
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px 20px 40px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    padding-left: 40px;
-    color:white
+  background-color: rgba(65, 88, 75, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 20px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding-left: 40px;
+  color: white;
 }
 
 header img {
-    max-height: 150px;
-    max-width: 100%;
-    margin-left: 20px;
+  max-height: 150px;
+  max-width: 100%;
+  margin-left: 20px;
 }
+
 nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
+
 .menu {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .menu li {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .menu a {
-    text-decoration: none;
-    color: rgba(183,165,125,1);
-    transition: color 0.3s ease-in-out;
+  text-decoration: none;
+  color: rgba(183, 165, 125, 1);
+  transition: color 0.3s ease-in-out;
 }
-.active a{
-    color:white
+
+.active a {
+  color: white;
 }
 
 .menu a:hover {
-    color: white;
+  color: white;
 }
 
 .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
 
 .hamburger span {
-    height: 3px;
-    width: 25px;
-    background-color: #333;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    transition: transform 0.3s ease-in-out;
+  height: 3px;
+  width: 25px;
+  background-color: #333;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
 }
 
 @media (max-width: 767px) {
-    .menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        z-index: 1;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-    .menu.show {
-        display: flex;
-    }
+  .menu.show {
+    display: flex;
+  }
 
-    .menu li {
-        margin: 10px 0;
-    }
+  .menu li {
+    margin: 10px 0;
+  }
 
-    .menu a {
-        color: #333;
-    }
+  .menu a {
+    color: #333;
+  }
 
-    .menu a:hover {
-        color: #ff6f00;
-    }
+  .menu a:hover {
+    color: #ff6f00;
+  }
 
-    .hamburger {
-        display: flex;
-    }
+  .hamburger {
+    display: flex;
+  }
 }
 
-main{
-    flex:1;
-    margin-top: 190px;
+main {
+  flex: 1;
+  margin-top: 190px;
 }
+
 /* fondo Section Styles */
 #fondo {
-    background-image: url(/assets/img/background.jpeg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  background-image: url(/assets/img/background.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 #fondo h2 {
-    color: #fff;
-    font-size: 36px;
-    margin-bottom: 20px;
+  color: #fff;
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
 #fondo p {
-    color: #fff;
-    font-size: 24px;
-    margin-bottom: 40px;
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 40px;
 }
 
 .btn {
-    background-color: #f6b319;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color .3s ease-in-out;
+  background-color: #f6b319;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .btn:hover {
-    background-color: #c79716;
+  background-color: #c79716;
 }
 
 /* habitaciones Section Styles */
 #habitaciones {
-    padding: 50px;
+  padding: 50px;
 }
 
 #habitaciones h2 {
-    margin-bottom: 40px;
-    text-align: center;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 #habitaciones ul {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #habitaciones li {
-    flex-basis: 30%;
-    margin-right: 5%;
-    margin-bottom: 50px;
-    position: relative;
+  flex-basis: 30%;
+  margin-right: 5%;
+  margin-bottom: 50px;
+  position: relative;
 }
 
 #habitaciones li:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #habitaciones li img {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 #habitaciones li h3 {
-    margin: 20px 0;
-    text-align: center;
+  margin: 20px 0;
+  text-align: center;
 }
 
 #habitaciones li p {
-    color: #888;
-    margin-bottom: 20px;
-    text-align: center;
+  color: #888;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Facilities Section Styles */
 #facilities {
-    background-color: #f5f5f5;
-    padding: 50px;
+  background-color: #f5f5f5;
+  padding: 50px;
 }
 
 #facilities h2 {
-    margin-bottom: 40px;
-    text-align: center;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 #facilities ul {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #facilities li {
-    flex-basis: 30%;
-    margin-right: 5%;
-    margin-bottom: 50px;
-    position: relative;
+  flex-basis: 30%;
+  margin-right: 5%;
+  margin-bottom: 50px;
+  position: relative;
 }
 
 #facilities li:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #facilities li img {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 /*#facilities li h3 {
@@ -252,172 +257,351 @@ main{
 }*/
 
 #facilities li p {
-    color: #888;
-    margin-bottom: 20px;
-    text-align: center;
+  color: #888;
+  margin-bottom: 20px;
+  text-align: center;
 }
+
 #contact {
-    background-color: #f9f9f9;
-    padding: 50px;
+  background-color: #f9f9f9;
+  padding: 50px;
 }
 
 #contact h2 {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 #contact form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #contact label {
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-#contact input, #contact textarea {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px #ccc;
+#contact input,
+#contact textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #ccc;
 }
 
 #contact textarea {
-    height: 150px;
+  height: 150px;
 }
 
 #contact button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #contact button:hover {
-    background-color: #0069d9;
+  background-color: #0069d9;
 }
 
+#contact .text-danger {
+  color: red;
+}
 
 /* Footer Styles */
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 50px;
+  background-color: #333;
+  color: #fff;
+  padding: 50px;
 }
+
 @media screen and (min-height: 100vh) {
-    body {
-        display: grid;
-        grid-template-rows: 1fr auto;
-        min-height: 100vh;
-    }
+  body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+  }
 }
 
 footer p {
-    margin: 0;
+  margin: 0;
 }
 
 footer ul {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 footer li {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 footer a {
-    color: #fff;
-    text-decoration: none;
-    transition: color .3s ease-in-out;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 footer a:hover {
-    color: #f6b319;
+  color: #f6b319;
 }
-.material-icons{
-    font-size: 24px;
+
+.material-icons {
+  font-size: 24px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 tr:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
-.text-danger{
-    color: red;
+
+.text-danger {
+  color: red;
 }
-#reservas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+#reservas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
 }
 
 #reservas form {
-    width: 400px;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #reservas h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #reservas p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #reservas label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 #reservas input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 #reservas input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #reservas input[type="submit"]:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 #reservas .text-danger {
-    color: red;
-    margin-top: 5px;
-    font-size: 14px;
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Form container */
+#addReserva .form-container {
+  max-width: 400px; /* Set a maximum width for the form container */
+  margin: 0 auto;
+}
+
+
+/* Heading */
+#addReserva h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form section heading */
+#addReserva h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Form labels */
+#addReserva label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Form input fields */
+#addReserva input[type="text"],
+#addReserva input[type="email"],
+#addReserva select {
+  width: 100%; /* Change width to 100% */
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+/* Error message */
+#addReserva .text-danger {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Submit button */
+#addReserva input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#addReserva input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Success message */
+#addReserva .text-success {
+  color: green;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Success modal */
+.modal-success {
+  display: block;
+}
+
+.modal-success h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-success p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-success .modal-close {
+  color: #000;
+  float: none;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.modal-success .modal-close:hover,
+.modal-success .modal-close:focus {
+  color: red;
+}
+
+/* Error modal */
+.modal-error {
+  display: block;
+}
+
+.modal-error h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  color: red;
+}
+
+.modal-error p {
+  text-align: center;
+  margin-bottom: 20px;
+  color: red;
+}
+
+.modal-error .modal-close {
+  color: red;
+  float: none;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.modal-error .modal-close:hover,
+.modal-error .modal-close:focus {
+  color: #000;
 }
