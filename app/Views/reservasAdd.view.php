@@ -1,14 +1,13 @@
 <main id="addReserva">
     <h2>Hotel Reservation Form</h2>
-    <form action="" method="POST">
+    <form action="" method="POST" class="form-container">
         <h3>Informacion del cliente</h3>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo isset($input['nombre']) ? $input['nombre'] : ''; ?>" required>
+        <input type="text" id="nombre" name="nombre" value="<?php echo isset($input['nombre']) ? $input['nombre'] : ''; ?>">
         <p class="text-danger"><?php echo!empty($errores['nombre']) ? $errores['nombre'] : ''; ?></p>
         <br><br>
-
         <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" value="<?php echo isset($input['email']) ? $input['email'] : ''; ?>" required>
+        <input type="email" id="email" name="email" value="<?php echo isset($input['email']) ? $input['email'] : ''; ?>">
         <p class="text-danger"><?php echo!empty($errores['email']) ? $errores['email'] : ''; ?></p>
         <br><br>
 

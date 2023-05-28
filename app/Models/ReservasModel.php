@@ -23,14 +23,14 @@ class ReservasModel extends \Com\Daw2\Core\BaseModel {
     }
 
     public function getHabitaciones() {
-        $stmt = $this->pdo->query('SELECT id_habitacion FROM habitaciones');
+        $stmt = $this->pdo->query('SELECT * FROM habitaciones');
         return $stmt->fetchAll();
     }
 
     public function checkHabitacionesAvailable($fecha_llegada, $fecha_salida) {
         //query que devuelve las ocupcadas
         $stmt1 = $this->pdo->prepare('
-SELECT habitacion
+SELECT DISTINCT habitacion
 FROM reservas
 WHERE (fecha_llegada < :fecha_llegada AND :fecha_llegadaa < fecha_salida)
 OR (fecha_llegada < :fecha_salida AND :fecha_salidaa < fecha_salida)
@@ -62,14 +62,23 @@ OR (:fecha_llegadaaa <= fecha_llegada AND fecha_salida <= :fecha_salidaaa)
                 $todasHabitaciones[] = $todasHabitacionesConsulta[$i]['id_habitacion'];
             }
         }
+        //if el numero de ocupadas es el mismo que todas habitaciones hacer consulta que da 0
+        if (count($ocupadas) == (count($todasHabitaciones))) {
+            $libres = [''];
+            $stmt = $this->pdo->prepare("SELECT id_habitacion, nombre_habitacion FROM habitaciones WHERE id_habitacion LIKE ?");
+            $stmt->execute($libres);
+            return $stmt->fetchAll();
+        }
+        //else la consulta esperada
+        else {
+            $libres = array_values((array_diff($todasHabitaciones, $ocupadas))); // Ensure the array keys are consecutive
 
-        $libres = array_values((array_diff($todasHabitaciones, $ocupadas))); // Ensure the array keys are consecutive
+            $placeholders = implode(',', array_fill(0, count($libres), '?'));
 
-        $placeholders = implode(',', array_fill(0, count($libres), '?'));
-
-        $stmt = $this->pdo->prepare("SELECT id_habitacion, nombre_habitacion FROM habitaciones WHERE id_habitacion IN ($placeholders)");
-        $stmt->execute($libres);
-        return $stmt->fetchAll();
+            $stmt = $this->pdo->prepare("SELECT id_habitacion, nombre_habitacion FROM habitaciones WHERE id_habitacion IN ($placeholders)");
+            $stmt->execute($libres);
+            return $stmt->fetchAll();
+        }
     }
 
 }
