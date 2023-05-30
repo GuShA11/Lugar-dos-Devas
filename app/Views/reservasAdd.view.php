@@ -25,8 +25,9 @@
             ?>
         </select>
         <p class="text-danger"><?php echo!empty($errores['habitacion']) ? $errores['habitacion'] : ''; ?></p>
-
-
+        <?php if (true) { ?>
+            <a href="/"><p>Ver detalles de las habitaciones</p></a>
+        <?php } ?>
         <div style="display:none;">
             <input type="date" id="fecha-llegada" name="fecha-llegada" value="<?php echo $_POST['fecha-llegada'] ?>">
             <input type="date" id="fecha-salida" name="fecha-salida" value="<?php echo $_POST['fecha-salida'] ?>">

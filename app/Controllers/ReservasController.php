@@ -117,7 +117,6 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
             }
         } else {
             $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['errores'] = $error1es;
             $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
         }
     }

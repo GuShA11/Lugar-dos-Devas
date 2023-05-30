@@ -590,3 +590,103 @@ tr:hover {
     background-color: green;
     color:white;
 }
+
+#restaurante .header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+#restaurante  h1 {
+    color: #333;
+    margin: 0;
+}
+
+#restaurante .dish {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#restaurante   .dish h2 {
+    color: #555;
+    margin: 10px 0;
+}
+
+#restaurante  .dish p {
+    color: #888;
+    margin: 0;
+}
+#restaurante .dish img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+#contacto{
+    background-image: url('/assets/img/contacto1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#contacto *{
+    color:white;
+}
+#contacto .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#contacto h1 {
+    color:white;
+    text-align: center;
+    color: #333;
+}
+
+#contacto form {
+    margin-top: 20px;
+}
+
+#contacto .form-group {
+    margin-bottom: 20px;
+}
+
+#contacto .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#contacto .form-group input,
+#contacto .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color:black;
+}
+
+#contacto .form-group textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+#contacto .form-group button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contacto .form-group button:hover {
+    background-color: #45a049;
+}

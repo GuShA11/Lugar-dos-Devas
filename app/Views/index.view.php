@@ -28,7 +28,7 @@
                     <li>
                         <img src="<?php echo $habitacion['src'] ?>" alt="<?php echo $habitacion['nombre_habitacion'] ?>">
                         <h3><?php echo $habitacion['nombre_habitacion'] ?></h3>
-                        <p>Desde <?php echo $habitacion['precio_noche'] ?>€/noche</p>
+                        <p>Descripcion <?php echo $habitacion['descripcion'] ?> desde <?php echo $habitacion['precio_noche'] ?>€/noche</p>
                         <a href="/reservas" class="btn">¡Reserva ya!</a>
                     </li>
                     <?php
@@ -58,17 +58,5 @@
                 <p>Tratamientos y masajes</p>
             </li>
         </ul>
-    </section>
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message"></textarea>
-            <button type="submit" class="btn">Send</button>
-        </form>
     </section>
 </main>
