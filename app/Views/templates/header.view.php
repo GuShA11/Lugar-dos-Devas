@@ -18,13 +18,13 @@
                 <?php
                 if (isset($_SESSION['permisos'])) {
                     ?>
-                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/reservas/admin' ? 'active' : ''; ?>"><a href="/reservas/admin">Reservas</a></li>
-                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/habitaciones/admin' ? 'active' : ''; ?>"><a href="/habitaciones/admin">Habitaciones</a></li>
-                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/usuarios/admin' ? 'active' : ''; ?>"><a href="/usuarios/admin">Usuarios</a></li>
+                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/reservasAdmin' ? 'active' : ''; ?>"><a href="/reservasAdmin">Reservas</a></li>
+                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/habitacionesAdmin' ? 'active' : ''; ?>"><a href="/habitacionesAdmin">Habitaciones</a></li>
+                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/usuariosAdmin' ? 'active' : ''; ?>"><a href="/usuariosAdmin">Usuarios</a></li>
                     <?php
                 } else {
                     ?>
-                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/index' ? 'active' : ''; ?>"><a href="/">Inicio</a></li>
+                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/' ? 'active' : ''; ?>"><a href="/">Inicio</a></li>
                     <li class="nav-link <?php echo isset($seccion) && $seccion === '/reservas' ? 'active' : ''; ?>"><a href="/reservas">Reservas</a></li>
                     <li class="nav-link <?php echo isset($seccion) && $seccion === '/restaurante' ? 'active' : ''; ?>"><a href="/restaurante">Restaurante</a></li>
                     <li class="nav-link <?php echo isset($seccion) && $seccion === '/contacto' ? 'active' : ''; ?>"><a href="/contacto">Contacto</a></li>

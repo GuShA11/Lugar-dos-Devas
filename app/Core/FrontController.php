@@ -91,17 +91,63 @@ class FrontController {
         } else {
 
             //usuariosAdmin
+            //permisos ver
             Route::add(
-                    '/usuarios/admin',
+                    '/usuariosAdmin',
                     function () {
-                        $controlador = new \Com\Daw2\Controllers\IndexController();
-                        $controlador->usuarios();
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->mostrarTodos();
                     },
                     'get'
             );
+
+            //permisos borrar
+            Route::add('/usuariosAdmin/delete/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->delete($id);
+                    }
+                    , 'get');
+
+            Route::add('/usuariosAdmin/baja/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->baja($id);
+                    }
+                    , 'get');
+
+            //permisos escritura
+            Route::add('/usuariosAdmin/edit/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->mostrarEdit($id);
+                    }
+                    , 'get');
+
+            Route::add('/usuariosAdmin/edit/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->edit($id);
+                    }
+                    , 'post');
+
+            Route::add('/usuariosAdmin/add',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->mostrarAdd();
+                    }
+                    , 'get');
+
+            Route::add('/usuariosAdmin/add',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                        $controlador->add();
+                    }
+                    , 'post');
+
             //habitacionesAdmin
             Route::add(
-                    '/habitaciones/admin',
+                    '/habitacionesAdmin',
                     function () {
                         $controlador = new \Com\Daw2\Controllers\IndexController();
                         $controlador->habitaciones();
@@ -111,7 +157,7 @@ class FrontController {
 
             //reservasAdmin
             Route::add(
-                    '/reservas/admin',
+                    '/reservasAdmin',
                     function () {
                         $controlador = new \Com\Daw2\Controllers\IndexController();
                         $controlador->reservas();
@@ -126,6 +172,7 @@ class FrontController {
                     }
                     , 'get');
         }
+        //rutas para los dos
         //path not found error404
         Route::pathNotFound(
                 function () {

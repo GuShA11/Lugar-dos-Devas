@@ -64,12 +64,8 @@
           <!-- /.col -->
         </div>
       </form>
-      
-    <!-- /.login-card-body -->
   </div>
 </div>
-<!-- /.login-box -->
-
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
