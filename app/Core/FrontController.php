@@ -55,19 +55,11 @@ class FrontController {
                     '/reservas',
                     function () {
                         $controlador = new \Com\Daw2\Controllers\ReservasController();
-                        $controlador->checkAvailability();
+                        $controlador->add(false);
                     },
                     'post'
             );
-            //reservas add cuando se pudo añadir
-            Route::add(
-                    '/reservas/add',
-                    function () {
-                        $controlador = new \Com\Daw2\Controllers\ReservasController();
-                        $controlador->add();
-                    },
-                    'post'
-            );
+
             //restaurante
             Route::add(
                     '/restaurante',
@@ -145,6 +137,54 @@ class FrontController {
                     }
                     , 'post');
 
+            //reservasAdmin
+            //permisos ver
+            Route::add(
+                    '/reservasAdmin',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->mostrarTodos();
+                    },
+                    'get'
+            );
+
+            //permisos borrar
+            Route::add('/reservasAdmin/delete/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->delete($id);
+                    }
+                    , 'get');
+
+            //permisos escritura
+            Route::add('/reservasAdmin/edit/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->mostrarEdit($id);
+                    }
+                    , 'get');
+
+            Route::add('/reservasAdmin/edit/([A-Za-z0-9]+)',
+                    function ($id) {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->edit($id);
+                    }
+                    , 'post');
+
+            Route::add('/reservasAdmin/add',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->mostrarAdd();
+                    }
+                    , 'get');
+
+            Route::add('/reservasAdmin/add',
+                    function () {
+                        $controlador = new \Com\Daw2\Controllers\ReservasController();
+                        $controlador->add(true);
+                    }
+                    , 'post');
+
             //habitacionesAdmin
             Route::add(
                     '/habitacionesAdmin',
@@ -155,15 +195,6 @@ class FrontController {
                     'get'
             );
 
-            //reservasAdmin
-            Route::add(
-                    '/reservasAdmin',
-                    function () {
-                        $controlador = new \Com\Daw2\Controllers\IndexController();
-                        $controlador->reservas();
-                    },
-                    'get'
-            );
             //borrarSession
             Route::add('/session/borrar',
                     function () {

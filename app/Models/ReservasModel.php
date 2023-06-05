@@ -81,4 +81,31 @@ OR (:fecha_llegadaaa <= fecha_llegada AND fecha_salida <= :fecha_salidaaa)
         }
     }
 
+    function getAll(): array {
+        $stmt = $this->pdo->query('SELECT reservas.*,habitaciones.nombre_habitacion FROM reservas LEFT JOIN habitaciones on habitaciones.id_habitacion = reservas.habitacion ORDER BY id_reserva');
+        return $stmt->fetchAll();
+    }
+
+    function loadReserva(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT reservas.*,nombre_habitacion FROM reservas LEFT JOIN habitaciones on habitaciones.id_habitacion = reservas.habitacion WHERE id_reserva=?');
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
+    function size(): int {
+        $stmt = $this->pdo->query('SELECT COUNT(*) as total FROM reservas');
+        return $stmt->fetchColumn(0);
+    }
+
+    function delete(string $id): bool {
+        $stmt = $this->pdo->prepare('DELETE FROM reservas WHERE id_reserva=?');
+        $stmt->execute([$id]);
+        return ($stmt->rowCount() == 1);
+    }
+
+    function update(array $data, int $id): bool {
+        $stmt = $this->pdo->prepare('UPDATE reservas SET nombre=?, email=? WHERE id_reserva=?');
+        return $stmt->execute([$data['nombre'], $data['email'], $id]);
+    }
+
 }

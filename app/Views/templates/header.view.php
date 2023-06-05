@@ -18,9 +18,9 @@
                 <?php
                 if (isset($_SESSION['permisos'])) {
                     ?>
+                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/usuariosAdmin' ? 'active' : ''; ?>"><a href="/usuariosAdmin">Usuarios</a></li>
                     <li class="nav-link <?php echo isset($seccion) && $seccion === '/reservasAdmin' ? 'active' : ''; ?>"><a href="/reservasAdmin">Reservas</a></li>
                     <li class="nav-link <?php echo isset($seccion) && $seccion === '/habitacionesAdmin' ? 'active' : ''; ?>"><a href="/habitacionesAdmin">Habitaciones</a></li>
-                    <li class="nav-link <?php echo isset($seccion) && $seccion === '/usuariosAdmin' ? 'active' : ''; ?>"><a href="/usuariosAdmin">Usuarios</a></li>
                     <?php
                 } else {
                     ?>
