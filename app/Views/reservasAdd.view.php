@@ -18,7 +18,7 @@
             if (count($habitacionesAvailable) > 0) {
                 foreach ($habitacionesAvailable as $c) {
                     ?>
-                    <option value="<?php echo $c['id_habitacion'] ?>"><?php echo $c['id_habitacion'] . ': ' . $c['nombre_habitacion'] ?></option>
+                    <option value="<?php echo $c['id_habitacion'] ?>"><?php echo $c['nombre_habitacion'] ?></option>
                     <?php
                 }
             }

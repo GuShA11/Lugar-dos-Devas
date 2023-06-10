@@ -8,6 +8,10 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
     public function showForm() {
         $data = [];
         $data['seccion'] = '/reservas';
+        if (isset($_SESSION['mensaje'])) {
+            $data['mensaje'] = $_SESSION['mensaje'];
+            unset($_SESSION['mensaje']);
+        }
         $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
     }
 
@@ -36,7 +40,8 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
                 }
             } else {
                 if ((isset($_POST['email'])) || (isset($_POST['nombre'])) || (isset($_POST['habitacion']))) {
-                    $habitaciones = $reservasModel->getHabitaciones();
+                    $modelo = new \Com\Daw2\Models\HabitacionesModel();
+                    $habitaciones = $modelo->getAll();
                     foreach ($habitaciones as $habitacion) {
                         $arrHabitaciones[] = $habitacion['id_habitacion'];
                     }
@@ -45,14 +50,16 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
                         $result = $reservasModel->add($_POST['email'], $_POST['nombre'], $_POST['fecha-llegada'], $_POST['fecha-salida'], $_POST['habitacion']);
                         if ($result == 1) {
                             $data = [];
+                            $_SESSION['mensaje'] = array(
+                                'class' => 'success',
+                                'texto' => 'Se ha creado la reserva correctamente!'
+                            );
                             if ($esAdmin) {
                                 $modelo = new \Com\Daw2\Models\ReservasModel();
                                 $data['reservas'] = $modelo->getAll();
-                                $_SESSION['mensaje'] = array('texto' => 'Se ha creado la reserva correctamente!');
-                                $this->view->showViews(array('templates/header.view.php', 'reservasAdmin.view.php', 'templates/footer.view.php'), $data);
+                                header('Location: /reservasAdmin');
                             } else {
-                                $data['reservaCreada'] = true;
-                                $this->view->showViews(array('templates/header.view.php', 'index.view.php', 'templates/footer.view.php'), $data);
+                                header('Location: /');
                             }
                             exit;
                         } else if ($result == 0) {
@@ -152,23 +159,24 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
             $data['mensaje'] = $_SESSION['mensaje'];
             unset($_SESSION['mensaje']);
         }
-
-        function mostrarAdd() {
-            $data = [];
-            $data['titulo'] = 'Nueva reserva del sistema';
-            $data['tituloDiv'] = "Alta reserva";
-            $data['seccion'] = '/reservasAdmin/add';
-            $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
-        }
-
         $this->view->showViews(array('templates/header.view.php', 'reservasAdmin.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    function mostrarAdd() {
+        $data = [];
+        $data['titulo'] = 'Nueva reserva del sistema';
+        $data['tituloDiv'] = "Alta reserva";
+        $data['seccion'] = '/reservasAdmin/add';
+        $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
     }
 
     function delete(string $id) {
         $modelo = new \Com\Daw2\Models\ReservasModel();
         $result = $modelo->delete($id);
         if ($result) {
-            $_SESSION['mensaje'] = array('texto' => 'Se ha borrado correctamente.'
+            $_SESSION['mensaje'] = array(
+                'class' => 'success',
+                'texto' => 'Se ha borrado la reserva correctamente!'
             );
             header('Location: /reservasAdmin');
         } else {
@@ -198,7 +206,10 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
         if (count($errores) == 0) {
             $modelo = new \Com\Daw2\Models\ReservasModel();
             if ($modelo->update($_POST, $id)) {
-                $_SESSION['mensaje'] = array('texto' => 'Se ha actulizado la reserva correctamente!');
+                $_SESSION['mensaje'] = array(
+                    'class' => 'success',
+                    'texto' => 'Se ha actualizado la reserva correctamente!'
+                );
                 header('location: /reservasAdmin');
             } else {
                 $data = [];

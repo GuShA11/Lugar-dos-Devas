@@ -6,9 +6,13 @@ class IndexController extends \Com\Daw2\Core\BaseController {
 
     public function index() {
         $data = [];
-        $data['seccion'] = '/index';
-        $reservasModel = new \Com\Daw2\Models\ReservasModel();
-        $data['habitaciones'] = $reservasModel->getHabitaciones();
+        $data['seccion'] = '/';
+        $modelo = new \Com\Daw2\Models\HabitacionesModel();
+        $data['habitaciones'] = $modelo->getAll();
+        if (isset($_SESSION['mensaje'])) {
+            $data['mensaje'] = $_SESSION['mensaje'];
+            unset($_SESSION['mensaje']);
+        }
         $this->view->showViews(array('templates/header.view.php', 'index.view.php', 'templates/footer.view.php'), $data);
     }
 

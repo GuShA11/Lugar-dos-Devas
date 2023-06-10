@@ -34,14 +34,11 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
 
     private function getPermisos(int $idRol): array {
         $permisos = array(
-            'reservas' => '',
             'usuarios_sistema' => '');
 
         if (self::ADMINISTRADOR == $idRol) {
-            $permisos['reservas'] = 'rwd';
             $permisos['usuarios_sistema'] = 'rwd';
         } else if (self::AUDITOR == $idRol) {
-            $permisos['reservas'] = 'r';
             $permisos['usuarios_sistema'] = 'r';
         }
         return $permisos;
@@ -74,6 +71,10 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
             $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
             $result = $modelo->delete($id);
             if ($result) {
+                $_SESSION['mensaje'] = array(
+                    'class' => 'success',
+                    'texto' => 'Se ha borrado correctamente!'
+                );
                 header('Location: /usuariosAdmin');
             } else {
                 $_SESSION['mensaje'] = array(
@@ -121,6 +122,10 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
         if (count($errores) == 0) {
             $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
             if ($modelo->insert($_POST)) {
+                $_SESSION['mensaje'] = array(
+                    'class' => 'success',
+                    'texto' => 'Se ha creado el usuario correctamente!'
+                );
                 header('location: /usuariosAdmin');
             } else {
                 $data = [];

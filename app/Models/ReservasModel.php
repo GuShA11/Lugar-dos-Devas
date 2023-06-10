@@ -22,11 +22,6 @@ class ReservasModel extends \Com\Daw2\Core\BaseModel {
         return true;
     }
 
-    public function getHabitaciones() {
-        $stmt = $this->pdo->query('SELECT * FROM habitaciones');
-        return $stmt->fetchAll();
-    }
-
     public function checkHabitacionesAvailable($fecha_llegada, $fecha_salida) {
         //query que devuelve las ocupcadas
         $stmt1 = $this->pdo->prepare('
@@ -54,7 +49,8 @@ OR (:fecha_llegadaaa <= fecha_llegada AND fecha_salida <= :fecha_salidaaa)
             $ocupadas[] = $ocupadasConsulta[$i]['habitacion'];
         }
 
-        $todasHabitacionesConsulta = $this->getHabitaciones();
+        $modelo = new \Com\Daw2\Models\HabitacionesModel();
+        $todasHabitacionesConsulta = $modelo->getAll();
         //dar valor a $todasHabitaciones
         $todasHabitaciones = [];
         if (count($todasHabitacionesConsulta) > 0) {
@@ -106,6 +102,12 @@ OR (:fecha_llegadaaa <= fecha_llegada AND fecha_salida <= :fecha_salidaaa)
     function update(array $data, int $id): bool {
         $stmt = $this->pdo->prepare('UPDATE reservas SET nombre=?, email=? WHERE id_reserva=?');
         return $stmt->execute([$data['nombre'], $data['email'], $id]);
+    }
+
+    function hasReservas(string $id): int {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) as total FROM reservas LEFT JOIN habitaciones ON habitaciones.id_habitacion = reservas.habitacion WHERE id_habitacion =? AND fecha_salida > CURDATE()');
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn(0);
     }
 
 }
