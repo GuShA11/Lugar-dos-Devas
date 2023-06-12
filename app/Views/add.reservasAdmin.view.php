@@ -1,5 +1,5 @@
 <main>
-    <div class="col-12">
+    <div class="col-6 cajaReservas">
         <div class="card shadow mb-4">
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="col-12 text-right">                            
-                            <input type="submit" value="Submit" name="enviar" class="btn btn-primary"/>
+                            <input type="submit" value="Enviar" name="enviar" class="btn btn-primary"/>
                         </div>
                     </div>
                 </form>

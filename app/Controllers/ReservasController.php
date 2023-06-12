@@ -12,7 +12,7 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
             $data['mensaje'] = $_SESSION['mensaje'];
             unset($_SESSION['mensaje']);
         }
-        $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
     }
 
     public function add(bool $esAdmin) {
@@ -33,11 +33,7 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
                 $errores['fecha'] = 'No existen habitaciones para esas fechas lo sentimos, contacte con nosotros para mas informacion';
                 $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
                 $data['errores'] = $errores;
-                if ($esAdmin) {
-                    $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
-                } else {
-                    $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
-                }
+                $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
             } else {
                 if ((isset($_POST['email'])) || (isset($_POST['nombre'])) || (isset($_POST['habitacion']))) {
                     $modelo = new \Com\Daw2\Models\HabitacionesModel();
@@ -75,28 +71,16 @@ class ReservasController extends \Com\Daw2\Core\BaseController {
                         }
                     } else {
                         $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-                        if ($esAdmin) {
-                            $this->view->showViews(array('templates/header.view.php', 'add.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
-                        } else {
-                            $this->view->showViews(array('templates/header.view.php', 'reservasAdd.view.php', 'templates/footer.view.php'), $data);
-                        }
+                        $this->view->showViews(array('templates/header.view.php', 'add.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
                     }
                 } else {
                     $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-                    if ($esAdmin) {
-                        $this->view->showViews(array('templates/header.view.php', 'add.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
-                    } else {
-                        $this->view->showViews(array('templates/header.view.php', 'reservasAdd.view.php', 'templates/footer.view.php'), $data);
-                    }
+                    $this->view->showViews(array('templates/header.view.php', 'add.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
                 }
             }
         } else {
             $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-            if ($esAdmin) {
-                $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
-            } else {
-                $this->view->showViews(array('templates/header.view.php', 'reservas.view.php', 'templates/footer.view.php'), $data);
-            }
+            $this->view->showViews(array('templates/header.view.php', 'show.reservasAdmin.view.php', 'templates/footer.view.php'), $data);
         }
     }
 

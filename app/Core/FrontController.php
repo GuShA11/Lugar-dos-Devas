@@ -10,7 +10,6 @@ class FrontController {
         session_start();
         //si no hay session es porque eres un usario default y ves index reservas restaurantes contacto login
         if (!isset($_SESSION['usuario'])) {
-
             //login GET
             Route::add(
                     '/login',
@@ -40,7 +39,6 @@ class FrontController {
                     },
                     'get'
             );
-
             //showReserva escoger fechas
             Route::add(
                     '/reservas',
@@ -50,7 +48,7 @@ class FrontController {
                     },
                     'get'
             );
-            //showReserva enseñar formulario para la reserva
+            //formulario reserva
             Route::add(
                     '/reservas',
                     function () {
@@ -59,7 +57,6 @@ class FrontController {
                     },
                     'post'
             );
-
             //restaurante
             Route::add(
                     '/restaurante',
@@ -79,11 +76,11 @@ class FrontController {
                     'get'
             );
 
-            //si hay session es porque eres admin y solo vas a ver lo de admin y borrarSession
+            //si hay session eres admin o auditor
         } else {
-            //usuariosAdmin
-            //permisos ver
+            //permisos lectura
             if (strpos($_SESSION['permisos']['usuarios_sistema'], 'r') !== false) {
+                //usuariosAdmin
                 Route::add(
                         '/usuariosAdmin',
                         function () {
@@ -92,9 +89,29 @@ class FrontController {
                         },
                         'get'
                 );
+                //reservasAdmin
+                Route::add(
+                        '/reservasAdmin',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\ReservasController();
+                            $controlador->mostrarTodos();
+                        },
+                        'get'
+                );
+                //habitacionesAdmin
+                Route::add(
+                        '/habitacionesAdmin',
+                        function () {
+                            $controlador = new \Com\Daw2\Controllers\HabitacionesController();
+                            $controlador->mostrarTodos();
+                        },
+                        'get'
+                );
             }
+
             //permisos borrar
             if (strpos($_SESSION['permisos']['usuarios_sistema'], 'd') !== false) {
+                //usuariosAdmin
                 Route::add('/usuariosAdmin/delete/([A-Za-z0-9]+)',
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
@@ -108,9 +125,24 @@ class FrontController {
                             $controlador->baja($id);
                         }
                         , 'get');
+                //reservasAdmin
+                Route::add('/reservasAdmin/delete/([A-Za-z0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\ReservasController();
+                            $controlador->delete($id);
+                        }
+                        , 'get');
+                //habitacionesAdmin
+                Route::add('/habitacionesAdmin/delete/([A-Za-z0-9]+)',
+                        function ($id) {
+                            $controlador = new \Com\Daw2\Controllers\HabitacionesController();
+                            $controlador->delete($id);
+                        }
+                        , 'get');
             }
+            //permisos escritura
             if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) {
-                //permisos escritura
+                //usuariosAdmin
                 Route::add('/usuariosAdmin/edit/([A-Za-z0-9]+)',
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
@@ -138,33 +170,7 @@ class FrontController {
                             $controlador->add();
                         }
                         , 'post');
-            }
-
-            //reservasAdmin
-            //permisos ver
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'r') !== false) {
-                Route::add(
-                        '/reservasAdmin',
-                        function () {
-                            $controlador = new \Com\Daw2\Controllers\ReservasController();
-                            $controlador->mostrarTodos();
-                        },
-                        'get'
-                );
-            }
-
-            //permisos borrar
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'd') !== false) {
-                Route::add('/reservasAdmin/delete/([A-Za-z0-9]+)',
-                        function ($id) {
-                            $controlador = new \Com\Daw2\Controllers\ReservasController();
-                            $controlador->delete($id);
-                        }
-                        , 'get');
-            }
-
-            //permisos escritura
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) {
+                //reservasAdmin
                 Route::add('/reservasAdmin/edit/([A-Za-z0-9]+)',
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\ReservasController();
@@ -192,33 +198,7 @@ class FrontController {
                             $controlador->add(true);
                         }
                         , 'post');
-            }
-
-            //habitacionesAdmin
-            //permisos ver
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'r') !== false) {
-                Route::add(
-                        '/habitacionesAdmin',
-                        function () {
-                            $controlador = new \Com\Daw2\Controllers\HabitacionesController();
-                            $controlador->mostrarTodos();
-                        },
-                        'get'
-                );
-            }
-
-            //permisos borrar
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'd') !== false) {
-                Route::add('/habitacionesAdmin/delete/([A-Za-z0-9]+)',
-                        function ($id) {
-                            $controlador = new \Com\Daw2\Controllers\HabitacionesController();
-                            $controlador->delete($id);
-                        }
-                        , 'get');
-            }
-
-            //permisos escritura
-            if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) {
+                //habitacionesAdmin
                 Route::add('/habitacionesAdmin/edit/([A-Za-z0-9]+)',
                         function ($id) {
                             $controlador = new \Com\Daw2\Controllers\HabitacionesController();
@@ -255,6 +235,7 @@ class FrontController {
                     }
                     , 'get');
         }
+
         //rutas para los dos
         //path not found error404
         Route::pathNotFound(

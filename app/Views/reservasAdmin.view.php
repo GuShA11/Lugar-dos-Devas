@@ -44,8 +44,8 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Email</th>
                             <th>Nombre</th>
+                            <th>Email</th>
                             <th>Precio Total</th>
                             <th>Fecha llegada</th>
                             <th>Fecha salida</th>
@@ -58,9 +58,9 @@
                     <tbody>
                         <?php foreach ($reservas as $r) { ?>
                             <tr>
-                                <td><?php echo $r['email']; ?></td>
                                 <td><?php echo $r['nombre']; ?></td>
-                                <td><?php echo $r['precio_total']; ?></td>
+                                <td><?php echo $r['email']; ?></td>
+                                <td><?php echo $r['precio_total']; ?>€</td>
                                 <td><?php echo $r['fecha_llegada']; ?></td>
                                 <td><?php echo $r['fecha_salida']; ?></td>
                                 <td><?php echo $r['nombre_habitacion']; ?></td>
@@ -78,7 +78,7 @@
                         </tr>
                     </tbody>
                     <tfoot>
-                        Total de registros: <?php echo count($reservas); ?>
+                        Total de Reservas: <?php echo count($reservas); ?>
                     </tfoot>
                 </table>
             </div>

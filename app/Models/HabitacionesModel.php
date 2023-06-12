@@ -22,7 +22,7 @@ class HabitacionesModel extends \Com\Daw2\Core\BaseModel {
         return $stmt->fetchAll();
     }
 
-    function loadHabitacion(string $id): array {
+    function loadHabitacion($id): array {
         $stmt = $this->pdo->prepare('SELECT * FROM habitaciones WHERE id_habitacion=?');
         $stmt->execute([$id]);
         return $stmt->fetch();

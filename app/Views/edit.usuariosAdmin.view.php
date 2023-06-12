@@ -5,10 +5,8 @@
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary"><?php echo $tituloDiv; ?></h6>                                    
             </div>
-            <!-- Card Body -->
             <div class="card-body">
                 <form action="<?php echo $seccion; ?>" method="post">         
-                    <!--form method="get"-->
                     <div class="row">
                         <div class="mb-3 col-sm-6">
                             <label for="nombre">Nombre de usuario</label>
@@ -19,11 +17,6 @@
                             <label for="pass">Contraseña</label>
                             <input class="form-control" id="pass" type="password" name="pass" placeholder="Sin modificar" value="">
                             <p class="text-danger"><?php echo isset($errores['pass']) ? $errores['pass'] : ''; ?></p>
-                        </div>
-                        <div class="mb-3 col-sm-6">
-                            <label for="user">User</label>
-                            <input class="form-control" id="user" type="text" name="user" placeholder="test" value="<?php echo isset($input['user']) ? $input['user'] : ''; ?>">
-                            <p class="text-danger"><?php echo isset($errores['user']) ? $errores['user'] : ''; ?></p>
                         </div>
                         <div class="mb-3 col-sm-4">
                             <label for="id_rol">Rol del usuario</label>

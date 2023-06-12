@@ -4,14 +4,14 @@
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <div class="col-6">
-                    <h2 class="m-0 installfont-weight-bold text-primary">Usuarios del sistema</h2> 
+                    <h2 class="m-0 installfont-weight-bold text-primary">Usuarios</h2> 
                 </div>
                 <div class="col-6">
                     <?php
                     if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) {
                         ?>
                         <div class="m-0 font-weight-bold justify-content-end">
-                            <a href="/usuariosAdmin/add/" class="btn btn-primary ml-1 float-right"> Nuevo Usuario del Sistema <i class="fas fa-plus-circle"></i></a>
+                            <a href="/usuariosAdmin/add/" class="btn btn-primary ml-1 float-right"> Nuevo Usuario <i class="fas fa-plus-circle"></i></a>
                         </div>
                         <?php
                     }
@@ -45,7 +45,6 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>User</th>
                             <th>Rol</th>
                             <?php if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) { ?>
                                 <th>Actions</th>
@@ -56,7 +55,6 @@
                         <?php foreach ($usuarios_sistema as $u) { ?>
                             <tr class="<?php echo $u['baja'] != '0' ? 'table-danger' : ''; ?>">
                                 <td><?php echo $u['nombre']; ?></td>
-                                <td><?php echo $u['user']; ?></td>
                                 <td><?php echo $u['nombre_rol']; ?></td>
                                 <?php if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) { ?>
                                     <td>
@@ -73,7 +71,7 @@
                         <?php } ?>
                     </tbody>
                     <tfoot>
-                        Total de registros: <?php echo count($usuarios_sistema); ?>
+                        Total de Usuarios: <?php echo count($usuarios_sistema); ?>
                     </tfoot>
                 </table>
             </div>

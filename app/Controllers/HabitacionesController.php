@@ -118,8 +118,9 @@ class HabitacionesController extends \Com\Daw2\Core\BaseController {
 
     function edit(int $id): void {
         $errores = $this->checkForm($_POST, $id);
+        $modelo = new \Com\Daw2\Models\HabitacionesModel();
+        $habitacion = $modelo->loadHabitacion($id);
         if (count($errores) == 0) {
-            $modelo = new \Com\Daw2\Models\HabitacionesModel();
             $src_array = $modelo->getSources();
             if (isset($_POST['foto'])) {//en el caso de ya tener foto el valor es 
                 $_FILES['src']['name'] = substr($_POST['foto'], 12);
@@ -141,6 +142,7 @@ class HabitacionesController extends \Com\Daw2\Core\BaseController {
                 $input = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
                 $data['titulo'] = 'Habitacion ' . $habitacion['nombre_habitacion'] . ' con ID: ' . $id;
                 $data['seccion'] = '/habitacionesAdmin/edit/' . $id;
+                $data['tituloDiv'] = 'Editando ' . $habitacion['nombre_habitacion'] . '';
                 $data['input'] = $input;
                 $data['errores'] = ['nombre' => 'Error indeterminado al guardar'];
 
@@ -151,6 +153,7 @@ class HabitacionesController extends \Com\Daw2\Core\BaseController {
             $input = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
             $data['titulo'] = 'Habitacion ' . $habitacion['nombre_habitacion'] . ' con ID: ' . $id;
             $data['seccion'] = '/usuariosAdmin/edit/' . $id;
+            $data['tituloDiv'] = 'Editando ' . $habitacion['nombre_habitacion'] . '';
             $data['input'] = $input;
             $data['errores'] = $errores;
 

@@ -5,21 +5,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lugar dos Devas</title>
+        <link rel="icon" type="image/x-icon" href="/assets/img/LOGO.svg">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="assets/css/css.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-        <!-- icheck bootstrap -->
         <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Theme style -->
         <link rel="stylesheet" href="assets/css/adminlte.min.css">
         <link href="assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     </head>
 </head>
 <body>
     <header>
-        <h1>Lugar dos Devas</h1>
+        <h1 id="titulo_pagina">Lugar dos Devas</h1>
         <img src="/assets/img/LOGO2.svg" alt="Logo">
         <nav>
             <ul class="menu">

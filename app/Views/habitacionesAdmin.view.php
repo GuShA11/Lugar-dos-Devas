@@ -45,8 +45,8 @@
                     <thead>
                         <tr>
                             <th>Nombre Habitacion</th>
-                            <th>Precio/noche (€)</th>
-                            <th>Descripcion</th>
+                            <th>Precio/noche</th>
+                            <th>Descripción</th>
                             <?php if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) { ?>
                                 <th>Actions</th>
                             <?php } ?>
@@ -56,7 +56,7 @@
                         <?php foreach ($habitaciones as $u) { ?>
                             <tr>
                                 <td><?php echo $u['nombre_habitacion']; ?></td>
-                                <td><?php echo $u['precio_noche']; ?></td>
+                                <td><?php echo $u['precio_noche']; ?>€</td>
                                 <td><?php echo $u['descripcion']; ?></td>
                                 <?php if (strpos($_SESSION['permisos']['usuarios_sistema'], 'w') !== false) { ?>
                                     <td>
@@ -70,7 +70,7 @@
                         <?php } ?>
                     </tbody>
                     <tfoot>
-                        Total de registros: <?php echo count($habitaciones); ?>
+                        Total de Habitaciones: <?php echo count($habitaciones); ?>
                     </tfoot>
                 </table>
             </div>

@@ -15,7 +15,7 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
 
     public function loginProcess() {
         $usuarioSistemaModel = new \Com\Daw2\Models\UsuarioSistemaModel();
-        $user = $usuarioSistemaModel->login($_POST['user'], $_POST['pass']);
+        $user = $usuarioSistemaModel->login($_POST['nombre'], $_POST['pass']);
         $_vars = [];
         if (is_null($user)) {
             $_vars['loginError'] = 'Datos de acceso incorrectos';
@@ -51,7 +51,6 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
 
         $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
         $data['usuarios_sistema'] = $modelo->getAll();
-
         if (isset($_SESSION['mensaje'])) {
             $data['mensaje'] = $_SESSION['mensaje'];
             unset($_SESSION['mensaje']);
@@ -175,6 +174,10 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
         if (count($errores) == 0) {
             $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
             if ($modelo->update($_POST, $id)) {
+                $_SESSION['mensaje'] = array(
+                    'class' => 'success',
+                    'texto' => 'Se ha actualizado el usuário correctamente!'
+                );
                 if ($_POST['pass'] != '') {
                     $modelo->updatePass($id, $_POST['pass']);
                 }
@@ -207,24 +210,23 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
 
     function checkForm(array $post, bool $esAlta = true, int $id = 0): array {
         $errores = [];
+
         if (empty($post['nombre'])) {
             $errores['nombre'] = "Campo obligatorio";
+        } else {
+            $userModel = new \Com\Daw2\Models\UsuarioSistemaModel();
+            if ($userModel->countByEmailNotUser($post['nombre'], $id) > 0) {
+                $errores['nombre'] = 'El nombre seleccionado ya está en uso';
+            }
         }
 
         if ($esAlta || $post['pass'] != '') {
             if (empty($post['pass'])) {
                 $errores['pass'] = "Campo obligatorio";
+            } else if ($post['pass'] == '') {
+                $errores['pass'] = "Campo obligatorio";
             } else if (!preg_match('/.*[a-zA-Z0-9].*/', $post['pass'])) {
                 $errores['pass'] = "El password debe estar compuesto por letras y numeros y una longitud mayor que 0";
-            }
-        }
-
-        if (empty($post['user'])) {
-            $errores['user'] = "Campo obligatorio";
-        } else {
-            $userModel = new \Com\Daw2\Models\UsuarioSistemaModel();
-            if ($userModel->countByEmailNotUser($post['user'], $id) > 0) {
-                $errores['user'] = 'El user seleccionado ya está en uso';
             }
         }
 
