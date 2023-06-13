@@ -7,7 +7,7 @@ html {
 
 @font-face {
     font-family: 'Poppins';
-    src: url('plugins/fonts/Poppins-Regular.ttf') format('truetype');
+    src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype');
 }
 
 body {
@@ -103,7 +103,7 @@ nav {
     transition: transform 0.3s ease-in-out !important;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1050px) {
 
     .menu {
         display: none !important;
