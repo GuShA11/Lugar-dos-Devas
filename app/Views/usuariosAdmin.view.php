@@ -40,7 +40,7 @@
         <?php
         if (count($usuarios_sistema) > 0) {
             ?>
-            <div class="table-container">
+            <div class="table-container table-responsive">
                 <table>
                     <thead>
                         <tr>

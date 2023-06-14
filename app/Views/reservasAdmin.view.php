@@ -1,4 +1,4 @@
-<main>
+<main id="reservasAdmin">
     <div class="col-12">
         <div class="card shadow mb-4">
             <div
@@ -40,7 +40,7 @@
         <?php
         if (count($reservas) > 0) {
             ?>
-            <div class="table-container">
+            <div class="table-container table-responsive">
                 <table>
                     <thead>
                         <tr>

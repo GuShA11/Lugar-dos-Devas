@@ -1,4 +1,4 @@
-<main>
+<main id="addReserva">
     <div class="col-6 cajaReservas">
         <div class="card shadow mb-4">
             <div

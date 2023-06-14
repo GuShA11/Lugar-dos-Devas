@@ -1,4 +1,4 @@
-<main>
+<main id="habitacionesAdmin">
     <div class="col-12">
         <div class="card shadow mb-4">
             <div
@@ -40,7 +40,7 @@
         <?php
         if (count($habitaciones) > 0) {
             ?>
-            <div class="table-container">
+            <div class="table-container table-responsive">
                 <table>
                     <thead>
                         <tr>

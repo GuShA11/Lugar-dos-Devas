@@ -180,6 +180,7 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 50px;
 }
 
 #fondo h2 {
@@ -263,8 +264,8 @@ main {
 }
 
 .slide img {
-    width: 70%;
-    height: auto;
+    width: 500px;
+    height: 370px;
     object-fit: contain;
     image-rendering: optimizeQuality;
 }
@@ -560,3 +561,6 @@ tr:hover {
     justify-content: center;
 }
 
+.hold-transition login-page,.table-container,#usuariosAdmin,#reservasAdmin,#habitacionesAdmin,#editUsuario,#editReservas,#addReserva,#showReserva,#editHabitaciones{
+    background-color: #92df9a !important;
+}
